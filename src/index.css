@@ -73,12 +73,6 @@
     font-family: 'Inter', sans-serif;
   }
 
-  .grid-overlay {
-    background-image: 
-      linear-gradient(to right, hsl(0 0% 15% / 0.3) 1px, transparent 1px);
-    background-size: calc(100% / 12) 100%;
-  }
-
   .surgical-border {
     border: 1px solid hsl(0 0% 15%);
   }

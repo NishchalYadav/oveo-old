@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import HeroOrb from "../components/HeroOrb";
 import Layout from "../components/Layout";
+import GridAndStars from "../components/GridAndStars";
 
 const services = [
   {
@@ -35,58 +35,76 @@ const fadeUp = {
   }),
 };
 
+const StaggeredText = ({ text, el: El = "div", ...props }) => {
+  const chars = text.split("");
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.03, delayChildren: 0.3 * i },
+    }),
+  };
+  const child = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", damping: 12, stiffness: 100 },
+    },
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: { type: "spring", damping: 12, stiffness: 100 },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      {...props}
+    >
+      {chars.map((char, index) => (
+        <motion.span variants={child} key={`${char}-${index}`}>
+          {char}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
 const Index = () => {
   return (
     <Layout>
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <HeroOrb />
-        <div className="relative z-10 text-center max-w-3xl px-6">
+        <GridAndStars />
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+            <StaggeredText text="Precision-First Digital Architecture" className="text-5xl md:text-7xl font-bold leading-[1.05] tracking-tighter mb-6 text-white" />
+          </motion.div>
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-surgical mb-6"
-          >
-            Precision Digital Architecture
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl md:text-7xl font-bold leading-[1.05] tracking-tight mb-6"
-          >
-            We don't describe
-            <br />
-            the work.
-            <br />
-            <span className="text-muted-foreground">We execute it.</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+            transition={{ delay: 1, duration: 0.8 }}
             className="text-muted-foreground text-lg mb-10 max-w-lg mx-auto font-body"
           >
             Ovéo builds high-fidelity digital systems with surgical precision.
-            Every pixel is a critical component.
+            Every pixel, a critical component of the whole.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
           >
             <Link
               to="/engage"
-              className="inline-block px-8 py-4 border border-foreground text-foreground font-mono-heading text-sm uppercase tracking-widest hover:bg-foreground hover:text-background transition-all duration-300"
+              className="inline-block px-10 py-4 border border-white/50 text-white font-mono-heading text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 rounded-full"
             >
-              Engage →
+              Engage
             </Link>
           </motion.div>
         </div>
-
-        {/* Grid overlay */}
-        <div className="absolute inset-0 grid-overlay pointer-events-none opacity-20" />
       </section>
 
       {/* Services Overview */}
