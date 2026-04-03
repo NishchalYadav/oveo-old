@@ -47,7 +47,7 @@ const About = () => {
               className="space-y-6 text-muted-foreground leading-relaxed font-body"
             >
               <p>
-                Ovéo is led by <span className="text-foreground font-medium">Nishchal Yadav</span> — 
+                Ovéo is led by <span className="text-foreground font-medium"><a href="https://iamnishchal.web.app">Nishchal Yadav</a></span> — 
                 a precision-obsessed architect who treats every digital system like a living organism 
                 requiring exact calibration.
               </p>

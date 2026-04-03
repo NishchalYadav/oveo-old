@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import GridAndStars from "../components/GridAndStars";
+import Testimonials from "../components/Testimonials";
 
 const services = [
   {
@@ -142,33 +143,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-32 px-6 border-t border-border">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-5xl font-bold mb-6"
-          >
-            Ready for surgical precision?
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <Link
-              to="/engage"
-              className="inline-block px-8 py-4 bg-foreground text-background font-mono-heading text-sm uppercase tracking-widest hover:bg-muted-foreground transition-all duration-300"
-            >
-              Start a Project
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      <Testimonials />
     </Layout>
   );
 };

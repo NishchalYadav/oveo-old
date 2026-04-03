@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import Work from "./pages/Work";
 import About from "./pages/About";
 import Engage from "./pages/Engage";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/work" element={<Work />} />
             <Route path="/about" element={<About />} />
             <Route path="/engage" element={<Engage />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

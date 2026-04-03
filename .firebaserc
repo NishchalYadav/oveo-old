@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "oveolabs"
+  },
+  "targets": {
+    "oveolabs": {
+      "hosting": {
+        "oveolabs": [
+          "oveolabs"
+        ],
+        "oveo": [
+          "oveo"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -2,12 +2,9 @@ import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 
 const projects = [
-  { title: "Nexus Platform", category: "Structural Assembly", year: "2025" },
-  { title: "Apex Interface", category: "Surgical Interface", year: "2025" },
-  { title: "Meridian Brand", category: "Identity Resonance", year: "2024" },
-  { title: "Pulse Analytics", category: "Operational Intelligence", year: "2024" },
-  { title: "Vertex Systems", category: "Structural Assembly", year: "2024" },
-  { title: "Cipher Identity", category: "Identity Resonance", year: "2024" },
+  { title: "Lumina", description: "Dental Clinic Portfolio Website", year: "2026", url: "https://luminadental.vercel.app", imageUrl: "/thumbnail/Lumina.png" },
+  { title: "Broducers", description: "Community for music producers, artists", year: "2025", url: "https://broducers.vercel.app", imageUrl: "/thumbnail/broducershub.png" },
+  { title: "GamerCrew", description: "Tournament Community for Esports Players", year: "2025", url: "https://gamercrew.vercel.app", imageUrl: "/thumbnail/gamercrew.png" },
 ];
 
 const fadeUp = {
@@ -51,32 +48,35 @@ const Work = () => {
       </section>
 
       <section className="px-6 pb-32">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((project, i) => (
+            <a href={project.url} target="_blank" rel="noopener noreferrer" key={project.title}>
             <motion.div
-              key={project.title}
               custom={i}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="bg-background group cursor-pointer"
+              className="bg-background group cursor-pointer overflow-hidden rounded-lg border border-border"
             >
-              <div className="aspect-[4/3] bg-secondary flex items-center justify-center border-b border-border overflow-hidden">
-                <span className="font-mono-heading text-6xl font-bold text-muted-foreground/20 group-hover:text-muted-foreground/40 transition-colors duration-500 group-hover:scale-110 transform">
-                  {project.title.charAt(0)}
-                </span>
+              <div className="aspect-[4/3] bg-secondary border-b border-border overflow-hidden">
+                <img 
+                  src={project.imageUrl} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                />
               </div>
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-surgical">{project.category}</span>
-                  <span className="text-surgical">{project.year}</span>
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <span className="text-muted-foreground text-sm">{project.year}</span>
                 </div>
-                <h3 className="text-xl font-semibold group-hover:text-muted-foreground transition-colors">
-                  {project.title}
-                </h3>
+                <p className="text-muted-foreground text-sm">{project.description}</p>
               </div>
             </motion.div>
+            </a>
           ))}
         </div>
       </section>

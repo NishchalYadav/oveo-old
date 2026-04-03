@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -13,6 +13,17 @@ const links = [
 const Navbar = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -23,7 +34,11 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-6 left-0 right-0 z-50 w-[95%] max-w-5xl mx-auto rounded-3xl border border-border bg-background/80 backdrop-blur-xl shadow-2xl"
+      className={`fixed top-6 left-0 right-0 z-50 w-[95%] max-w-5xl mx-auto rounded-3xl shadow-2xl transition-colors duration-300 border border-white/20 ${
+        hasScrolled
+          ? "bg-black/80 backdrop-blur-xl"
+          : "bg-black/50 backdrop-blur-lg"
+      }`}
     >
       <div className="flex items-center justify-between px-4 py-2">
         <Link
@@ -74,9 +89,18 @@ const Navbar = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
+              {isMobileMenuOpen ? (
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </>
+              ) : (
+                <>
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </>
+              )}
             </svg>
           </button>
         </div>
@@ -87,9 +111,9 @@ const Navbar = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden"
+            className="md:hidden overflow-hidden rounded-b-3xl"
           >
-            <div className="flex flex-col items-center gap-4 py-4">
+            <div className="flex flex-col items-center gap-4 py-4 bg-black/90">
               {links.map((link) => (
                 <Link
                   key={link.to}
